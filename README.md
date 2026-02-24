@@ -462,6 +462,7 @@ The purpose of these evaluation methods is to get an honest estimate of how well
 One of the most common approaches to evaluation is k-fold cross-validation, which is an evaluation technique that splits your training dataset into k-parts to estimate the performance of a machine learning model.  In the biotech industry, where data collection is often expensive and time-consuming, making the most of limited data is crucial. K-fold cross-validation offers a robust solution for this by allowing us to run multiple experimental replicates “in silico”. Instead of just splitting the training data set into two sub-segments used to build and evaluate our model, we divide it into k parts and perform k different evaluations, each time using a different portion as the test set. So for example, if k=4, then we evaluate our model four times and each time a different fold is used for testing while the other three are used to train the model, as demonstrated in the image below. This results in four performance scores, which can be averaged to determine how well your model performs.
 
 <img width="412" height="148" alt="Screenshot 2026-02-24 at 10 13 55 AM" src="https://github.com/user-attachments/assets/1d4c5009-17aa-4ce7-b2bc-3e03fe6423eb" />
+
 > This figure depicts how k-fold cross validation works using k=4 as an example. Note than on each fold there are k-1 trainng splits and 1 testing split. 
 
 K-fold cross-validation is particularly valuable when working with heterogeneous biological data, where a single split might not be representative. When performing k-fold cross-validation, the most critical decision you'll have to make is how large your k is (i.e., how many splits or folds you create). For moderate to large-sized datasets (thousands or tens of thousands of rows), k-values of 5-10 are common, whereas k-values of 3-5 are more appropriate for smaller datasets. But, what happens if your dataset is so small that splitting it into multiple components results in biased performance? This is where leave-one-out cross validation (LOOCV) comes in. LOOCV takes k-fold cross-validation to its extreme, setting k equal to the number of samples. While computationally expensive, this approach is often worth the cost in scenarios where data collection is the primary bottleneck either due to cost or scarcity of samples. Additionally, there are other methods worth considering, such as bootstrapping which allows you to estimate a statistics variability when working with small datasets, where splitting the data into distinct folds would leave too little for training. 
@@ -707,6 +708,7 @@ Logistic Regression (L1) 0.822135     0.058315   0.717535 0.767033  0.736150
                  XGBoost 0.782182     0.043984   0.740073 0.738462  0.738497
 
 ```
+
 <img width="542" height="202" alt="Screenshot 2026-02-24 at 10 24 27 AM" src="https://github.com/user-attachments/assets/afd525a1-4280-4e68-8969-6924ca26d1b5" />
 
 The output shows that Logistic Regression (L2) achieves the highest cross-validated ROC-AUC of 0.846, followed closely by Logistic Regression (L1) at 0.822. Notably, the L2 model also has the smallest standard deviation across folds (±0.044), indicating it is the most stable—an important consideration in small-sample settings where variance in performance estimates can be high. The tree-based ensemble methods (Random Forest, Gradient Boosting, XGBoost) perform reasonably well but trail the linear models, which is typical when the underlying signal is relatively linear or when the dataset is small enough that regularized linear models outperform more complex non-linear alternatives. Based on these results, we carry Logistic Regression (L2) and Logistic Regression (L1) forward for hyperparameter tuning in Step 9.
@@ -722,6 +724,7 @@ Typically, when working with transcriptomic, proteomic, or metabolomic data the 
 
 ### Example Code
 The code below tunes the two top-performing models from Step 8—Logistic Regression (L2) and Logistic Regression (L1)—using GridSearchCV with 5-fold cross-validation and ROC-AUC as the optimization target. For each model, we define a grid of candidate hyperparameter values (primarily varying C, the regularization strength, and solver). GridSearchCV exhaustively evaluates every combination on the training folds, selecting the combination that maximizes average validation AUC. After finding the best hyperparameters for each model, we then evaluate each tuned model on the held-out validation set to make our final model selection.
+
 ```python
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
@@ -1134,7 +1137,9 @@ NPV:                   66.67%  (16/24 predicted non-pCR are correct)
 ROC CURVE
 ------------------------------------------------------------
 ```
+
 <img width="545" height="401" alt="Screenshot 2026-02-24 at 10 32 16 AM" src="https://github.com/user-attachments/assets/40cc977a-258e-4b5f-acb8-24cec7818f3e" />
+
 ```
 ============================================================
 FINAL MODEL SUMMARY
@@ -1194,7 +1199,7 @@ if best_model_name in ['Logistic Regression (L2)', 'Logistic Regression (L1)']:
    for i, (idx, row) in enumerate(feature_importance.head(20).iterrows(), 1):
        direction = "pCR +" if row['Coefficient'] > 0 else "Non-pCR +"
        print(f"{i:<6} {row['Protein']:<35} {row['Coefficient']:>12.4f} {direction:>12}")
-``
+```
 ```
 Top 20 Most Influential Proteins:
 ------------------------------------------------------------
