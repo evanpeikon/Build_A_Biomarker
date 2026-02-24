@@ -1,2 +1,17 @@
-# Build_A_Biomarker
-A DIY Guide to Developing Proteomic Biomarker Panels 
+<img width="720" height="65" alt="Screenshot 2026-02-24 at 8 28 56 AM" src="https://github.com/user-attachments/assets/00d71c54-962c-4994-8068-d893d7085e48" />
+
+## Overview
+This article is intended to fill in a conceptual gap–something I’ve identified when trying to find good resources that allow an experienced computational biologist, with a general understanding of machine learning, to blend their unique skillset and create a biomarker panel that can be used to predict a given outcome, like treatment response in triple negative breast cancer (TNBC), for example. Importantly, this article assumes that the reader has familiarity with concepts like…
+
+- Basic python programming and scientific computing 
+- RNA sequencing, high-throughput proteomics, metabolomics (ie., the types of data we’ll be discussing in this piece). 
+- Pairwise and one-vs-all differential expression analysis (what these are, how to interpret the results and what they mean biologically). 
+- Machine learning fundamentals (what are classification vs regression methods, what dimensionality reduction is, how to read and interpret basic model evaluation metrics. Ideally, you’ll have at least done some simple projects like predicting Boston housing prices). 
+
+Part of my inspiration for writing this piece is that most of the resources I've previously come across, or written myself, are about isolated components of ML model development such as data processing, algorithm spot-checking, training a model, evaluating it, and tuning it. However, I've yet to come across a resource that explains the big picture–how all of these things fit together, and then guides you through the thinking process at each step from data acquisition to model deployment. That is the goal of this piece. By virtue of that, I see this as a constantly evolving resource that will grow, adapt, and change over time based on what I’ve learned, what readers do / don’t understand on first or second pass, as well as critique and feedback from people with more experience than me. To that effect, if there’s anything that strongly resonates with you in this piece, that you feel is not articulated clearly, or that you feel is not factually correct and/or optimal please feel free to shoot me an email at evanpeikon@gmail.com. 
+
+### How to use this guide
+This guide is written to serve two different types of readers, and knowing which one you are will help you get the most out of it.
+If you're newer to building ML models on omics data—or if you want to follow along with a complete working example—read it linearly. Every section builds on the previous one, and the code at each step picks up exactly where the last left off. By the end, you'll have a complete, functional pipeline that you can adapt to your own dataset.
+
+If you already have ```sklearn``` experience and are primarily here for the conceptual and domain-specific depth—how to handle proteomics missingness, which algorithms suit omics data and why, what makes a biomarker biologically interpretable—you can use The Big Picture section as a map and jump directly to the steps most relevant to your current problem. Each step is written to be self-contained enough to read in isolation, with the practical best-practice guidance clearly separated from the worked example code.
