@@ -1,7 +1,7 @@
 <img width="720" height="65" alt="Screenshot 2026-02-24 at 8 28 56 AM" src="https://github.com/user-attachments/assets/00d71c54-962c-4994-8068-d893d7085e48" />
 
 # Overview
-This article is intended to fill in a conceptual gap–something I’ve identified when trying to find good resources that allow an experienced computational biologist, with a general understanding of machine learning, to blend their unique skillset and create a biomarker panel that can be used to predict a given outcome, like treatment response in triple negative breast cancer (TNBC), for example. Importantly, this article assumes that the reader has familiarity with concepts like…
+This guide is intended to fill in a conceptual gap–something I’ve identified when trying to find good resources that allow an experienced computational biologist, with a general understanding of machine learning, to blend their unique skillset and create a biomarker panel that can be used to predict a given outcome, like treatment response in triple negative breast cancer (TNBC), for example. Importantly, this article assumes that the reader has familiarity with concepts like…
 
 - Basic python programming and scientific computing (if you need a refresher, check out [Python Fundamentals for Biologists](https://github.com/evanpeikon/Python_Fundamentals_Biology)). 
 - RNA sequencing, high-throughput proteomics, metabolomics (ie., the types of data we’ll be discussing in this piece). 
